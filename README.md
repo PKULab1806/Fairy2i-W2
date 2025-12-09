@@ -2,8 +2,7 @@
 
 ## 🔗 Links
 
-- **🤗 Hugging Face Model**: [Fairy2i-W2 on Hugging Face](https://huggingface.co/PKULab1806/Fairy2i-W2)
-- **📄 Paper**: [arXiv Paper](https://arxiv.org/abs/2512.02901)
+**🔗 Links**: [![Hugging Face](https://img.shields.io/badge/🤗_Hugging_Face-FFD21E?logoColor=black)](https://huggingface.co/PKULab1806/Fairy2i-W2)[![Paper](https://img.shields.io/badge/Paper-arXiv-red?logo=arxiv&logoColor=white)](https://arxiv.org/abs/2512.02901) [![ModelScope](https://img.shields.io/badge/ModelScope-9B59B6?logoColor=white)](https://modelscope.cn/models/PKULab1806/Fairy2i-W2)
 
 ## Table of Contents
 
