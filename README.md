@@ -120,6 +120,40 @@ response = tokenizer.decode(outputs[0], skip_special_tokens=True)
 print(response)
 ```
 
+### 📊 Data Processing
+
+The training data is processed from RedPajama-Data-1T using two sequential steps:
+
+#### Step 1: Sample 100B tokens from RedPajama-Data-1T
+
+Use `dataset/sample.py` to sample 100B tokens from the RedPajama-Data-1T dataset:
+
+```bash
+cd dataset
+python sample.py
+```
+
+This script:
+- Loads the RedPajama-Data-1T dataset from Hugging Face
+- Samples approximately 100B tokens using 10 parallel processes
+- Saves the sampled data to `new_dataset_100B_redpajama_final_dataset{0-9}` directories
+
+#### Step 2: Process into 2048-token aligned blocks
+
+Use `dataset/padding_and_cut.py` to chunk the sampled data into 2048-token aligned blocks:
+
+```bash
+cd dataset
+python padding_and_cut.py
+```
+
+This script:
+- Loads the sampled datasets from Step 1
+- Processes data into 2048-token aligned blocks using `group_and_chunk` function
+- Saves the processed data to `dataset_100B_redpajama_2048_aligned/` directory
+
+**Note:** Make sure to update the input paths in `padding_and_cut.py` to point to your sampled dataset directories.
+
 ### 🏋️ Training
 
 To train a model with QAT, use the training script:
@@ -163,7 +197,7 @@ bash eval_task.sh
 - **Quantization Method**: Complex-Phase V2 (2-step recursive residual quantization)
 - **Effective Bit Width**: 2 bits per real parameter
 - **Codebook**: $\{\pm 1, \pm i\}$ (fourth roots of unity)
-- **Training**: QAT (Quantization-Aware Training) on 30B tokens from RedPajama dataset
+- **Training**: QAT (Quantization-Aware Training) on 30B tokens(30% of 100B) from RedPajama dataset
 
 ## 📁 Repository Structure
 
@@ -174,6 +208,9 @@ fairy2i-w2-repo-github/
 │   ├── __init__.py
 │   ├── qat_modules.py          # QAT linear layer implementations
 │   └── quantization.py         # Quantization functions (PhaseQuant, BitNet, etc.)
+├── dataset/
+│   ├── sample.py               # Sample 100B tokens from RedPajama-Data-1T
+│   └── padding_and_cut.py     # Process data into 2048-token aligned blocks
 ├── train/
 │   ├── train.py                # Training script
 │   ├── train.sh                # Training launch script
