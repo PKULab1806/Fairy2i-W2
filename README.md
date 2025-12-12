@@ -205,4 +205,4 @@ This model follows the same license as LLaMA-2. Please refer to the original LLa
 
 ## 📧 Contact
 
-For questions or issues, please contact: yangtong@pku.edu.cn
+For questions or issues, please contact: tanxinyu330@gmail.com
