@@ -77,7 +77,7 @@ if __name__ == "__main__":
     per_proc_token_count = total_tokens // num_processes
     name = "new_dataset_100B_redpajama"#save dir
     print(f"begin sample {total_tokens/1e6:.2f}M tokens ,with {num_processes} processes,each process will sample {per_proc_token_count/1e6:.2f}M tokens")
-    dataset = load_dataset("togethercomputer/RedPajama-Data-1T", split="train")
+    dataset = load_dataset("togethercomputer/RedPajama-Data-1T", "default", split="train")
     print(dataset)
     
     shards = [ dataset.shard(num_shards=num_processes,index = i,contiguous=True) for i in range(num_processes)]
